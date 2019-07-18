@@ -39,7 +39,7 @@ app.get('/about', (req, res)=>{
 app.get('/help', (req, res)=>{
     res.render('help', {
         title:"Help",
-        message: "There is no help. You will die alone becouse you are weak and helpless.",
+        message: "Unfortunately you are helpless.",
         name: "Max"
     })
 })
