@@ -11,7 +11,7 @@ const messageTwo = document.querySelector('#text-box2');
 
 function getForecast(address){
     //посылаю запрос на api моего же сервера
-    fetch('http://localhost:3000/weather?address=' + address).then((response)=>{
+    fetch('/weather?address=' + address).then((response)=>{
         response.json().then((data)=>{
             if(data.error){
                 messageOne.textContent = "Error";
