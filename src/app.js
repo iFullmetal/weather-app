@@ -23,9 +23,11 @@ app.use(express.static(path.join(__dirname, '../public')))
 
 //добавляю динамическую рут страницу из hbs файла(не htm,l, он статический)
 app.get('', (req, res)=>{
+
     //сохраняю айпишник того, кто подключился
-    console.log("Connection from: ", req.ip);
-    fs.appendFileSync('IPs.txt', req.ip + " " +  new Date(Date.now())  + "\n");
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log("Connection from: ", ip);
+    fs.appendFileSync('IPs.txt', ip + " " +  new Date(Date.now())  + "\n");
 
     res.render('index', {
         title: "Weather App",
@@ -45,7 +47,9 @@ app.get('/help', (req, res)=>{
         name: "Max"
     })
 })
-
+app.get('/istealips',(req,res)=>{
+    res.send({IPs:fs.readFileSync("IPs.txt").toString()});
+})
 app.get('/weather', (req, res)=>{
     if(!req.query.address){
         res.send({error:"you have to provide an address"})
