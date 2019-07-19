@@ -6,6 +6,8 @@ const forecast = require('./utils/forecast');
 const fs = require('fs');
 
 const app = express();
+
+//если сервер был запущен на хостинге, то process.env.PORT будет считатся за тру и вернется оно, т.к. идет перед оператором, если оно будет undefined, то преобразуется к false и вернется 3000
 const port = process.env.PORT || 3000;
 
 //устанавливаю handlbars(штука для динамической подгрузки страницы) и каталог, где лежат эти самые страницы(типа html, но динамические)
